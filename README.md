@@ -57,6 +57,7 @@ Apache-2.0
 Similar projects
 ----------------
 
+* https://github.com/leangen/geantyref
 * https://github.com/spring-projects/spring-framework/blob/v6.0.2/spring-core/src/main/java/org/springframework/core/GenericTypeResolver.java#L44
 * https://github.com/FasterXML/jackson-databind/blob/2.15/src/main/java/com/fasterxml/jackson/databind/introspect/MethodGenericTypeResolver.java#L23
 * https://github.com/ljacqu/JavaTypeResolver
