@@ -13,7 +13,7 @@ The code is based on [TypeParameterResolver from mybatis-3](https://github.com/m
 Sample
 ------
 
-```mvn
+```xml
 <dependency>
   <groupId>net.harawata.reflection</groupId>
   <artifactId>typeparameterresolver</artifactId>
