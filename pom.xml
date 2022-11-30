@@ -3,6 +3,28 @@
   <groupId>net.harawata.reflection</groupId>
   <artifactId>typeparameterresolver</artifactId>
   <version>1.0.0-SNAPSHOT</version>
+  <packaging>jar</packaging>
+  <name>TypeParameterResolver</name>
+  <description>Resolve type parameters.</description>
+  <url>https://github.com/harawata/typeparameterresolver</url>
+  <licenses>
+    <license>
+      <name>The Apache License, Version 2.0</name>
+      <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
+    </license>
+  </licenses>
+  <scm>
+    <url>https://github.com/harawata/typeparameterresolver</url>
+    <connection>scm:git:ssh://github.com/harawata/typeparameterresolver.git</connection>
+    <developerConnection>scm:git:ssh://git@github.com/harawata/typeparameterresolver.git</developerConnection>
+    <tag>HEAD</tag>
+  </scm>
+  <developers>
+    <developer>
+      <name>Iwao AVE!</name>
+      <email>harawata@gmail.com</email>
+    </developer>
+  </developers>
   <properties>
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
@@ -35,7 +57,7 @@
         <extensions>true</extensions>
         <configuration>
           <serverId>ossrh</serverId>
-          <nexusUrl>https://s01.oss.sonatype.org/</nexusUrl>
+          <nexusUrl>https://oss.sonatype.org/</nexusUrl>
           <autoReleaseAfterClose>true</autoReleaseAfterClose>
         </configuration>
       </plugin>
