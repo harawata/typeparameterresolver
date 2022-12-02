@@ -62,14 +62,6 @@ public class TypeParameterResolver {
     return resolveType(returnType, srcType, declaringClass);
   }
 
-  private static Type[] resolveTypes(Type[] types, Type srcType, Class<?> declaringClass) {
-    Type[] args = new Type[types.length];
-    for (int i = 0; i < types.length; i++) {
-      args[i] = resolveType(types[i], srcType, declaringClass);
-    }
-    return args;
-  }
-
   /**
    * Resolve param types.
    *
@@ -98,6 +90,14 @@ public class TypeParameterResolver {
    */
   public static Type[] resolveClassTypeParameters(Class<?> ancestor, Type srcType) {
     return resolveTypes(ancestor.getTypeParameters(), srcType, ancestor);
+  }
+
+  private static Type[] resolveTypes(Type[] types, Type srcType, Class<?> declaringClass) {
+    Type[] args = new Type[types.length];
+    for (int i = 0; i < types.length; i++) {
+      args[i] = resolveType(types[i], srcType, declaringClass);
+    }
+    return args;
   }
 
   private static Type resolveType(Type type, Type srcType, Class<?> declaringClass) {
