@@ -82,6 +82,25 @@ public class TypeParameterResolver {
     return result;
   }
 
+  /**
+   * Resolve class type parameters.
+   *
+   * @param ancestor
+   *          the ancestor class
+   * @param srcType
+   *          the src type
+   * @return The parameter types of the class as an array of {@link type}s. If they have type parameters in the declaration,<br>
+   *         they will be resolved to the actual runtime {@link Type}s.
+   */
+  public static Type[] resolveClassTypeParameters(Class<?> ancestor, Type srcType) {
+    TypeVariable<?>[] typeParameters = ancestor.getTypeParameters();
+    Type[] result = new Type[typeParameters.length];
+    for (int i = 0; i < typeParameters.length; i++) {
+      result[i] = resolveType(typeParameters[i], srcType, ancestor);
+    }
+    return result;
+  }
+
   private static Type resolveType(Type type, Type srcType, Class<?> declaringClass) {
     if (type instanceof TypeVariable) {
       return resolveTypeVar((TypeVariable<?>) type, srcType, declaringClass);
