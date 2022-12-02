@@ -202,6 +202,22 @@ class TypeParameterResolverTest {
   }
 
   @Test
+  void testWildcardTypeEquality() throws Exception {
+    Class<?> clazz = Level2Mapper.class;
+    Method method1 = clazz.getMethod("simpleSelectWildcard");
+    Type result1 = TypeParameterResolver.resolveReturnType(method1, clazz);
+    assertTrue(result1 instanceof ParameterizedType);
+    ParameterizedType paramType1 = (ParameterizedType) result1;
+
+    Method method2 = clazz.getMethod("selectWildcardList");
+    Type result2 = TypeParameterResolver.resolveReturnType(method2, clazz);
+    assertTrue(result2 instanceof ParameterizedType);
+    ParameterizedType paramType2 = (ParameterizedType) result2;
+
+    assertEquals(paramType1.getActualTypeArguments()[0], paramType2.getActualTypeArguments()[0]);
+  }
+
+  @Test
   void testReturn_Lv0InnerClass() throws Exception {
     Class<?> clazz = Level0InnerMapper.class;
     Method method = clazz.getMethod("select", Object.class);

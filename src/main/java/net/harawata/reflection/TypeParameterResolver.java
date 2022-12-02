@@ -294,6 +294,27 @@ public class TypeParameterResolver {
     public Type[] getUpperBounds() {
       return upperBounds;
     }
+
+    @Override
+    public int hashCode() {
+      final int prime = 31;
+      int result = 1;
+      result = prime * result + Arrays.hashCode(lowerBounds);
+      result = prime * result + Arrays.hashCode(upperBounds);
+      return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+      if (this == obj) {
+        return true;
+      }
+      if (!(obj instanceof WildcardTypeImpl)) {
+        return false;
+      }
+      WildcardTypeImpl other = (WildcardTypeImpl) obj;
+      return Arrays.equals(lowerBounds, other.lowerBounds) && Arrays.equals(upperBounds, other.upperBounds);
+    }
   }
 
   static class GenericArrayTypeImpl implements GenericArrayType {
