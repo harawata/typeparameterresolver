@@ -328,5 +328,22 @@ public class TypeParameterResolver {
     public Type getGenericComponentType() {
       return genericComponentType;
     }
+
+    @Override
+    public int hashCode() {
+      return Objects.hash(genericComponentType);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+      if (this == obj) {
+        return true;
+      }
+      if (!(obj instanceof GenericArrayTypeImpl)) {
+        return false;
+      }
+      GenericArrayTypeImpl other = (GenericArrayTypeImpl) obj;
+      return Objects.equals(genericComponentType, other.genericComponentType);
+    }
   }
 }

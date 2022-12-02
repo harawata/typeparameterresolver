@@ -218,6 +218,18 @@ class TypeParameterResolverTest {
   }
 
   @Test
+  void testGenericArrayTypeEquality() throws Exception {
+    Class<?> clazz = Level2Mapper.class;
+    Method method1 = clazz.getMethod("selectArrayOfList");
+    Type result1 = TypeParameterResolver.resolveReturnType(method1, clazz);
+
+    Method method2 = clazz.getMethod("selectArray", List[].class);
+    Type[] result2 = TypeParameterResolver.resolveParamTypes(method2, clazz);
+
+    assertEquals(result1, result2[0]);
+  }
+
+  @Test
   void testReturn_Lv0InnerClass() throws Exception {
     Class<?> clazz = Level0InnerMapper.class;
     Method method = clazz.getMethod("select", Object.class);
