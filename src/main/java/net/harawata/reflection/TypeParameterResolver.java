@@ -89,7 +89,7 @@ public class TypeParameterResolver {
    *          the ancestor class
    * @param srcType
    *          the src type
-   * @return The parameter types of the class as an array of {@link type}s. If they have type parameters in the declaration,<br>
+   * @return The parameter types of the class as an array of {@link Type}s. If they have type parameters in the declaration,<br>
    *         they will be resolved to the actual runtime {@link Type}s.
    */
   public static Type[] resolveClassTypeParameters(Class<?> ancestor, Type srcType) {
