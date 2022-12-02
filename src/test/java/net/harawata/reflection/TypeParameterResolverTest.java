@@ -180,6 +180,28 @@ class TypeParameterResolverTest {
   }
 
   @Test
+  void testParameterizedTypeEquality() throws Exception {
+    Class<?> clazz = Level2Mapper.class;
+    Method method1 = clazz.getMethod("selectArrayOfList");
+    Type result1 = TypeParameterResolver.resolveReturnType(method1, clazz);
+    assertTrue(result1 instanceof GenericArrayType);
+    GenericArrayType genericArrayType = (GenericArrayType) result1;
+    assertTrue(genericArrayType.getGenericComponentType() instanceof ParameterizedType);
+    ParameterizedType paramType1 = (ParameterizedType) genericArrayType.getGenericComponentType();
+    assertEquals(List.class, paramType1.getRawType());
+    assertEquals(String.class, paramType1.getActualTypeArguments()[0]);
+
+    Method method2 = clazz.getMethod("selectList", Object.class, Object.class);
+    Type result2 = TypeParameterResolver.resolveReturnType(method2, clazz);
+    assertTrue(result2 instanceof ParameterizedType);
+    ParameterizedType paramType2 = (ParameterizedType) result2;
+    assertEquals(List.class, paramType2.getRawType());
+    assertEquals(String.class, paramType2.getActualTypeArguments()[0]);
+
+    assertEquals(paramType1, paramType2);
+  }
+
+  @Test
   void testReturn_Lv0InnerClass() throws Exception {
     Class<?> clazz = Level0InnerMapper.class;
     Method method = clazz.getMethod("select", Object.class);
