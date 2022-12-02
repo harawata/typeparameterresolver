@@ -380,6 +380,17 @@ class TypeParameterResolverTest {
   }
 
   @Test
+  void testClassTypeParameters() throws Exception {
+    Class<?> clazz = Level2Mapper.class;
+    Class<?> ancestor = Level0Mapper.class;
+    Type[] result = TypeParameterResolver.resolveClassTypeParameters(ancestor, clazz);
+    assertEquals(3, result.length);
+    assertEquals(Date.class, result[0]);
+    assertEquals(Integer.class, result[1]);
+    assertEquals(String.class, result[2]);
+  }
+
+  @Test
   void testReturnParam_WildcardWithUpperBounds() throws Exception {
     class Key {
     }
