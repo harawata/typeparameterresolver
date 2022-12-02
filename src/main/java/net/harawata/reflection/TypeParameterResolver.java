@@ -27,6 +27,7 @@ import java.lang.reflect.Type;
 import java.lang.reflect.TypeVariable;
 import java.lang.reflect.WildcardType;
 import java.util.Arrays;
+import java.util.Objects;
 
 public class TypeParameterResolver {
 
@@ -253,6 +254,22 @@ public class TypeParameterResolver {
       return rawType;
     }
 
+    @Override
+    public int hashCode() {
+      return (ownerType == null ? 0 : ownerType.hashCode()) ^ Arrays.hashCode(actualTypeArguments) ^ rawType.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+      if (!(obj instanceof ParameterizedType)) {
+        return false;
+      }
+      ParameterizedType other = (ParameterizedType) obj;
+      return rawType.equals(other.getRawType()) && Objects.equals(ownerType, other.getOwnerType())
+          && Arrays.equals(actualTypeArguments, other.getActualTypeArguments());
+    }
+
+    @Override
     public String toString() {
       return "ParameterizedTypeImpl [rawType=" + rawType + ", ownerType=" + ownerType + ", actualTypeArguments="
           + Arrays.toString(actualTypeArguments) + "]";
