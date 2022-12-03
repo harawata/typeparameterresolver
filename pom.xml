@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>net.harawata.reflection</groupId>
   <artifactId>typeparameterresolver</artifactId>
-  <version>1.0.2</version>
+  <version>1.0.3-SNAPSHOT</version>
   <packaging>jar</packaging>
   <name>TypeParameterResolver</name>
   <description>Resolve type parameters.</description>
@@ -17,7 +17,7 @@
     <url>https://github.com/harawata/typeparameterresolver</url>
     <connection>scm:git:ssh://github.com/harawata/typeparameterresolver.git</connection>
     <developerConnection>scm:git:ssh://git@github.com/harawata/typeparameterresolver.git</developerConnection>
-    <tag>typeparameterresolver-1.0.2</tag>
+    <tag>HEAD</tag>
   </scm>
   <developers>
     <developer>
