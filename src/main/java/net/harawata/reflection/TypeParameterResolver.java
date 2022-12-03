@@ -27,6 +27,7 @@ import java.lang.reflect.Type;
 import java.lang.reflect.TypeVariable;
 import java.lang.reflect.WildcardType;
 import java.util.Arrays;
+import java.util.Objects;
 
 public class TypeParameterResolver {
 
@@ -253,6 +254,22 @@ public class TypeParameterResolver {
       return rawType;
     }
 
+    @Override
+    public int hashCode() {
+      return (ownerType == null ? 0 : ownerType.hashCode()) ^ Arrays.hashCode(actualTypeArguments) ^ rawType.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+      if (!(obj instanceof ParameterizedType)) {
+        return false;
+      }
+      ParameterizedType other = (ParameterizedType) obj;
+      return rawType.equals(other.getRawType()) && Objects.equals(ownerType, other.getOwnerType())
+          && Arrays.equals(actualTypeArguments, other.getActualTypeArguments());
+    }
+
+    @Override
     public String toString() {
       return "ParameterizedTypeImpl [rawType=" + rawType + ", ownerType=" + ownerType + ", actualTypeArguments="
           + Arrays.toString(actualTypeArguments) + "]";
@@ -277,6 +294,27 @@ public class TypeParameterResolver {
     public Type[] getUpperBounds() {
       return upperBounds;
     }
+
+    @Override
+    public int hashCode() {
+      final int prime = 31;
+      int result = 1;
+      result = prime * result + Arrays.hashCode(lowerBounds);
+      result = prime * result + Arrays.hashCode(upperBounds);
+      return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+      if (this == obj) {
+        return true;
+      }
+      if (!(obj instanceof WildcardTypeImpl)) {
+        return false;
+      }
+      WildcardTypeImpl other = (WildcardTypeImpl) obj;
+      return Arrays.equals(lowerBounds, other.lowerBounds) && Arrays.equals(upperBounds, other.upperBounds);
+    }
   }
 
   static class GenericArrayTypeImpl implements GenericArrayType {
@@ -289,6 +327,23 @@ public class TypeParameterResolver {
 
     public Type getGenericComponentType() {
       return genericComponentType;
+    }
+
+    @Override
+    public int hashCode() {
+      return Objects.hash(genericComponentType);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+      if (this == obj) {
+        return true;
+      }
+      if (!(obj instanceof GenericArrayTypeImpl)) {
+        return false;
+      }
+      GenericArrayTypeImpl other = (GenericArrayTypeImpl) obj;
+      return Objects.equals(genericComponentType, other.genericComponentType);
     }
   }
 }
