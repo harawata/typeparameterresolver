@@ -94,6 +94,7 @@ class TypeParameterResolverTest {
     assertEquals(2, paramType.getActualTypeArguments().length);
     assertEquals(Integer.class, paramType.getActualTypeArguments()[0]);
     assertEquals(Double.class, paramType.getActualTypeArguments()[1]);
+    assertEquals("java.util.Map<java.lang.Integer, java.lang.Double>", result.toString());
   }
 
   @Test
@@ -108,6 +109,7 @@ class TypeParameterResolverTest {
     assertTrue(paramType.getActualTypeArguments()[0] instanceof WildcardType);
     WildcardType wildcard = (WildcardType) paramType.getActualTypeArguments()[0];
     assertEquals(String.class, wildcard.getUpperBounds()[0]);
+    assertEquals("java.util.List<? extends java.lang.String>", paramType.toString());
   }
 
   @Test
@@ -187,6 +189,7 @@ class TypeParameterResolverTest {
     assertTrue(result1 instanceof GenericArrayType);
     GenericArrayType genericArrayType = (GenericArrayType) result1;
     assertTrue(genericArrayType.getGenericComponentType() instanceof ParameterizedType);
+    assertEquals("java.util.List<java.lang.String>[]", genericArrayType.toString());
     ParameterizedType paramType1 = (ParameterizedType) genericArrayType.getGenericComponentType();
     assertEquals(List.class, paramType1.getRawType());
     assertEquals(String.class, paramType1.getActualTypeArguments()[0]);
